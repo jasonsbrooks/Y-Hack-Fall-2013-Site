@@ -1,2 +1,4 @@
+import time
 def coolCat():
-	print "Hello World"
+	time.sleep(4)
+	return "http://koalainfo.com/koala-mating/koala-mating-season.jpg"

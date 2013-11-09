@@ -13,24 +13,29 @@ bucket_name = AWS_ACCESS_KEY_ID.lower() + '-solocups'
 
 splash = Blueprint('splash', __name__, template_folder="")
 
-def id_generator(size=9, chars=string.ascii_uppercase + string.digits):
+def id_generator(size=15, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for x in range(size))
 
 @splash.route('/')
 def home():
-    coolCat()
     return render_template('templates/home.html')
 
 @splash.route('/photo_upload/', methods=["POST"])
 def photo_upload():
     file = request.files['Photo']
+    print type(file)
     filename = secure_filename(file.filename)
     conn = boto.connect_s3(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
-    bucket = conn.create_bucket(bucket_name)
+    bucket = conn.get_bucket(bucket_name)
     k = Key(bucket)
-
-    k.key = id_generator() + filename
-    k.set_contents_from_string(file.readlines())
+    k.key = id_generator() + "-" + filename
+    k.set_contents_from_string(file.read())
+    k.make_public()
     url = k.generate_url(expires_in=0, query_auth=False)
     print url
-    return "Success!"
+    return url
+
+@splash.route('/process_photo/', methods=["GET"])
+def process_photo():
+    url = coolCat()
+    return url

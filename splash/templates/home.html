@@ -1,14 +1,21 @@
 <html>
+<head>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script>
+	<script type="text/javascript" src="static/javascript/home.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/home.css" />
+	<link rel="stylesheet" type="text/css" href="static/css/reset.css" />
+</head>
 <body>
-<h1>DeSolo Cup</h1>
+	<h1>DeSolo Cup</h1>
 
-<form method="POST" enctype="multipart/form-data" action="/photo_upload/">
-	<input type="file" name="Photo">
-	<input type="submit" value="Submit Photo" />
-</form>
+	
+	<form id="myForm" method="post" enctype="multipart/form-data" action="/photo_upload/">
+		<input id="fileElem" type="file" name="Photo">
+		<button id="fileSelect">Choose a Photo</button>
+	</form>
 
-
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-
+	<img id="original" src=""></img>
+	<img id="new" src=""></img>
 </body>
 </html>
