@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    
-    
+
+
     document.querySelector('#fileSelect').addEventListener('click', function(e) {
         document.querySelector('#fileElem').click();
     }, false);
@@ -15,8 +15,14 @@ $(document).ready(function(){
         },
         success: function(data){
             $('#original').attr("src", data);
-            $.get( "/process_photo/", function(data) {
-                $( "#new" ).attr("src", data );
+            dataObj = {newLink: data};
+            $.ajax({
+                type: 'GET',
+                url: '/process_photo',
+                data: dataObj,
+                success: function(data){
+                    $( "#new" ).attr("src", data );
+                }
             });
     }});
 });
