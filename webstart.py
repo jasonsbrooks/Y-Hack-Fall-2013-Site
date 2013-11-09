@@ -19,4 +19,4 @@ def _return_static(blueprint_name, fn='index.html'):
     return send_file('%s/static/%s' % (path, fn)) 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
